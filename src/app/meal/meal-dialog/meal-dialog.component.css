@@ -1,0 +1,32 @@
+.food-list .food-button {
+    background: gray;
+    color: white;
+    font-size: 9px;
+    line-height: 18px;
+    height: auto;
+    padding: 5px;
+    border-radius: 5px;
+    margin: 5px;
+}
+
+.food-list .food-button:hover {
+    background: green;
+}
+
+.food-list {
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.selected-food-list {
+    border: 1px solid green;
+    border-radius: 5px;
+}
+
+.selected-food-list .food-button:hover {
+    background-color: red;
+}   
+
+.selected-food-list .food-button {
+    margin: 5px;
+}   

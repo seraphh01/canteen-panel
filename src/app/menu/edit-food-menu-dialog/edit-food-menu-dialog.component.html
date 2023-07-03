@@ -1,0 +1,24 @@
+
+    <mat-dialog-content>
+        <mat-card-title>
+            Edit Available Food Quantity
+        </mat-card-title>
+    </mat-dialog-content>
+    <form [formGroup]="form">
+        
+            <mat-form-field>
+                <input matInput disabled value="{{data.Name}} - {{data.Price}} RON">
+            </mat-form-field>
+        <br>
+            <mat-form-field>
+                <label for="Quantity">Quantity Available </label>
+                <input matInput name="Quantity" formControlName="Quantity">
+            </mat-form-field>
+    
+    </form>
+    
+    
+    <mat-dialog-actions>
+        <button mat-button mat-dialog-close>Cancel</button>
+        <button mat-button color="green" [disabled]="form.invalid" (click)="confirmDialog()">OK</button>
+    </mat-dialog-actions>

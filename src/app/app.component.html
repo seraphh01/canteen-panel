@@ -1,0 +1,9 @@
+<ng-container *ngIf="!isAuthenticated">
+  <app-login (authChanged)="onAuthChanged($event)"></app-login>
+</ng-container>
+
+<ng-container *ngIf="isAuthenticated">
+  <app-main-window></app-main-window>
+</ng-container>
+
+  

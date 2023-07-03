@@ -1,0 +1,53 @@
+
+<div class="parent-container">
+    <div class="menus-container">
+        <div class="header">
+            <span>
+                <h2 class="menu-name">Mese predefinite</h2>
+                    <button *ngIf="delete==false" mat-button (click)="switchDelete()">
+                    <mat-icon>delete_outline</mat-icon>
+                    </button>
+                    <button *ngIf="delete==true" mat-button (click)="switchDelete()">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+
+            </span>
+           
+            <div>
+              <button mat-button (click)="refreshMeals()" [disabled]="delete">
+                <mat-icon>refresh</mat-icon>
+              </button>
+            </div>
+          </div>
+          <div style="width:100%; margin:auto;">
+            <mat-form-field style="width: min-width;display: flex; align-items: center; justify-content: center;">
+            <input matInput placeholder = "Search Meal" (input)="onSearchChange()" [(ngModel)]="mealSearchName">
+            </mat-form-field>
+        </div>
+
+            <mat-list *ngIf="!delete">
+                <mat-list-item *ngFor="let meal of meals" (click)="openEditMealDialog(meal)">
+                    <span>{{ meal.Name }} - {{meal.Price}} RON</span>            
+                </mat-list-item>
+                <mat-list-item (click)="openAddNewMealDialog()">
+                    <mat-icon>add</mat-icon>
+                  </mat-list-item>
+            </mat-list>
+            <mat-list *ngIf="delete">
+                <mat-list-item *ngFor="let meal of meals" class="delete" (click)="openDeleteMealDialog(meal.Id)">
+                    <span>{{ meal.Name }} - {{meal.Price}} RON</span>            
+                </mat-list-item>
+                <mat-list-item (click)="openAddNewMealDialog()" disabled>
+                    <mat-icon>add</mat-icon>
+                  </mat-list-item>
+            </mat-list>
+          
+          
+        <mat-paginator [length]="pagination.TotalItems" [pageSize]="pagination.PageSize" [pageIndex]="pagination.PageIndex" [pageSizeOptions]="[10, 20, 50]"
+        (page)="onPageChanged($event)">
+      </mat-paginator>
+    </div>    
+  </div>
+  
+  
+  

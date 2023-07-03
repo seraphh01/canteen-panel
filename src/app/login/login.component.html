@@ -1,0 +1,36 @@
+<div class="parent-container">
+    <mat-card class="login-card">
+            <mat-card-title>
+                Login Panou Cantină
+            </mat-card-title>
+            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <mat-card-content class="form-field">
+            
+                <mat-form-field appearance="outline">
+                    <mat-label>Email</mat-label>
+                    <input matInput placeholder="hello@email.com" type="email" formControlName="email">
+                    <mat-icon matSuffix>email</mat-icon>
+                    <mat-hint color="red" *ngIf="f['email'].getError('required')">Email is required</mat-hint>
+                  </mat-form-field>
+
+                  <mat-form-field appearance="outline">
+                    <mat-label>Password</mat-label>
+                    <input matInput placeholder="A secure password" type="password" formControlName="password">
+                    <mat-icon matSuffix>password</mat-icon>
+                    <mat-hint color="red" *ngIf="f['password'].getError('required')">Password is required</mat-hint>
+                  </mat-form-field>
+            
+                  <mat-hint *ngIf="this.error">{{error}} Please try again!</mat-hint>
+        </mat-card-content>
+        <mat-card-actions class="card-actions">
+            <button mat-button mat-submit>
+                Log in
+            </button>
+            
+        </mat-card-actions>
+    </form>
+        
+    </mat-card>
+</div>
+
+

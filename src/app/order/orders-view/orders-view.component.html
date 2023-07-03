@@ -1,0 +1,53 @@
+<div class="parent-container">
+    <div class="orders-container">  
+      <div class="header">
+        <h2>Today's Orders - {{todayDate | date:"dd-MM-yyyy"}}</h2>
+        <button mat-button (click)="refreshOrders()">
+          <mat-icon>refresh</mat-icon>
+        </button>
+      </div>
+      <p matLine *ngIf="orders.length == 0">All done for today! :)</p>
+      <div class="container">
+
+        <mat-list class="orders-list">
+          <mat-list-item class="orders-list-item" [ngStyle]="{'background-color': getStatusColor(order), 'border': getStatusBorder(order) }" *ngFor="let order of orders" (click)="updateOrderStatus(order)">
+           
+              <h1 mat-line>Order #{{order.OrderNumber}} - {{ getOrderStatusName(order.OrderStatus) }} - {{order.Price}} RON</h1>
+              <p mat-line *ngIf="isDone(order)">Waiting for client confirmation</p>
+              <p mat-line *ngIf="clientConfirmed(order)">Confirm Client Picked Up</p>
+          </mat-list-item>
+          <!-- Add an order creation feature if required -->
+          <!-- 
+          <mat-list-item (click)="openAddOrderDialog()">
+            <mat-icon>add</mat-icon>
+          </mat-list-item> 
+          -->
+        </mat-list>
+  
+        <mat-list class="orders-processing-list">
+          <mat-list-item class="orders-processing-list-item" *ngFor="let order of getProcessingOrders()">
+            <h3 mat-line>Order #{{order.OrderNumber}} - {{order.OrderDateTime | date:"HH:mm:ss"}} - {{order.Price}} RON
+
+              <button class="cancel-button" color="red" mat-button (click)="cancelProcessing(order)">
+                Cancel
+              </button>
+
+              <button class="done-button" color="green" mat-button (click)="doneOrder(order)">
+                Done
+              </button>
+            </h3>
+            <p mat-line *ngIf="order.Meals.length > 0"><b>Meals: </b></p>
+            <p mat-line *ngFor="let meal of order.Meals">{{meal.Name}} ({{meal.AllFoods}}) x {{meal.Quantity}}</p>
+            <br>
+            <p mat-line *ngIf="order.Foods.length > 0"><b>Foods: </b></p>
+            <p mat-line *ngFor="let food of order.Foods">{{food.Name}} x {{food.Quantity}}</p>
+
+          </mat-list-item>
+        </mat-list>
+      </div>
+      
+    </div>
+
+    
+  </div>
+  

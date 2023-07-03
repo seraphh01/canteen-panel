@@ -1,0 +1,22 @@
+
+<div class="parent-container">
+  <div class="menus-container">
+    <div class="header">
+      <h2>Menus for each day</h2>
+      <button mat-button (click)="refreshMenus()">
+        <mat-icon>refresh</mat-icon>
+      </button>
+    </div>
+      
+      <mat-list>
+        <mat-list-item [ngStyle]="{'background-color': (currentWeekDay + 6 ) % 7 == menu.DayOfWeek?  'green' : 'white' }" *ngFor="let menu of menus" [routerLink]="['/menus', menu.Id]">
+          <span>{{ menu.Name }} - {{ daysOfWeek[menu.DayOfWeek].display }}</span>
+        </mat-list-item>
+        <mat-list-item (click)="openAddMenuDialog()">
+          <mat-icon>add</mat-icon>
+        </mat-list-item>
+      </mat-list>
+  </div>
+</div>
+
+

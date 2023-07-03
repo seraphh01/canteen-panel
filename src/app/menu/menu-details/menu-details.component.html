@@ -1,0 +1,81 @@
+<div class="parent-container" *ngIf="this.menu">
+  <div class="menu-details-container">
+    <div class="header">
+      <span>
+        <h2 mat-title color="primary" class="menu-name">{{menu.Name}}: {{menu.OpenTime}} - {{menu.CloseTime}}</h2>
+        <button mat-button (click)="openEditMenuDialog()" title="Show all Foods for this Menu">
+          <mat-icon>list</mat-icon>
+        </button>
+        <button mat-button (click)="openEditMenuDialog()">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-button (click)="openDeleteMenuDialog()">
+          <mat-icon>delete</mat-icon>
+        </button>
+
+        <h2></h2>
+      </span>
+     
+      <div>
+        <button mat-raised-button color="primary" (click)="goBack()">
+          <mat-icon>arrow_back</mat-icon>Înapoi
+        </button>
+      </div>
+    </div>
+    <div class="details-container">
+        <mat-card class="card-container">
+          <div class="card-container-header">
+            <h3 class="card-container-header-title">Mese predefinite</h3>
+            <button mat-button (click)="switchDeleteMeals()">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+          
+          <mat-card *ngFor="let meal of menu.Meals" class="meal-card" (click)="mealClicked(meal)" [ngStyle]="{'background-color': deleteMeals ? 'red' : 'white' }">
+            <mat-card-header>
+              <mat-card-title>{{meal.Name}} x {{meal.Price}} RON</mat-card-title>
+              
+            </mat-card-header>
+            <mat-card-content>
+              <p>Initial Quantity: {{meal.Quantity}}</p>
+              <p *ngIf="isMenuOfToday()">Remaining Quantity: {{meal.Quantity}} - {{meal.OrderedQuantity}} = {{meal.Quantity - meal.OrderedQuantity}}</p>
+            </mat-card-content>
+          </mat-card>
+          <mat-card *ngIf="!deleteMeals" class="meal-card"  (click)="addMealToMenu()">
+            <mat-card-title>
+              <mat-icon>add</mat-icon>
+            </mat-card-title>
+        </mat-card>  
+          </mat-card>
+          <mat-card class="card-container">
+            <div class="card-container-header">
+              <h3 class="card-container-header-title">Mâncare disponibilă</h3>
+              <button mat-button (click)="switchDeleteFoods()">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+            
+            <mat-card *ngFor="let food of menu.Foods" class="meal-card" (click)="foodClicked(food)" [ngStyle]="{'background-color': deleteFoods ? 'red' : 'white' }">
+              <mat-card-header>
+                <mat-card-title>{{food.Name}} x {{food.Price}} RON</mat-card-title>
+              </mat-card-header>
+              <mat-card-content>
+                <p>Initial Quantity: {{food.Quantity}}</p>
+                <p *ngIf="isMenuOfToday()">Remaining Quantity: {{food.Quantity}} - {{food.OrderedQuantity}} = {{food.Quantity - food.OrderedQuantity}}</p>
+                
+
+              </mat-card-content>
+            </mat-card>
+
+          <mat-card *ngIf="!deleteFoods" class="meal-card"  (click)="addFoodToMenu()">
+            <mat-card-title>
+              <mat-icon>add</mat-icon>
+            </mat-card-title>
+          </mat-card>  
+
+          </mat-card>
+    </div>
+</div>
+</div>
+
+

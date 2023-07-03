@@ -1,0 +1,35 @@
+.login-card{
+    text-align: left;
+    padding: 2rem;
+}
+
+mat-card-title {
+    text-align: left;
+    margin-bottom: 1.5rem;
+}
+
+mat-hint {
+    text-align: center;
+    color: red;
+}
+
+.form-field{
+    display: flex!important;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+}
+
+
+.card-actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: auto;
+}
+
+.card-actions button {
+    max-width: max-content;
+}

@@ -1,0 +1,38 @@
+<mat-dialog-content>
+    <mat-card-title>
+        <h1>Add Meal To Menu</h1>
+    </mat-card-title>
+
+    <div style="width:100%; margin:auto;">
+        <mat-form-field style="width: min-width;display: flex; align-items: center; justify-content: center;">
+        <input matInput placeholder = "Search Meal" (input)="onSearchChange()" [(ngModel)]="mealSearchName">
+        </mat-form-field>
+    </div>
+
+<div *ngIf="meals">
+    <button mat-button *ngFor="let meal of meals" [value]="meal.Name" (click)="mealSelected(meal)">{{meal.Name}}</button>
+</div>
+<mat-paginator [length]="pagination.TotalItems" [pageSize]="pagination.PageSize" [pageIndex]="pagination.PageIndex" [pageSizeOptions]="[10, 20, 50]"
+(page)="onPageChanged($event)">
+</mat-paginator>
+
+</mat-dialog-content>
+
+<div *ngIf="selectedMeal" style="margin:auto; justify-content: center; display: flex;">
+    
+    <span>
+        Adding: {{selectedMeal.Name}} x 
+        <mat-form-field>
+            <mat-label>Quantity</mat-label>
+            <input style="width: 50x" matInput name="Quantity" [(ngModel)]="selectedMealQuantity">
+        </mat-form-field>
+    </span>
+    
+</div>
+
+<mat-dialog-actions>
+
+    
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button *ngIf="selectedMeal" (click)="confirmAdd()">OK</button>
+  </mat-dialog-actions>

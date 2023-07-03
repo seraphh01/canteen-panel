@@ -1,0 +1,37 @@
+<form [formGroup]="form">
+  <h2 mat-dialog-title>{{ data ? "Edit Meal"  : 'Add Predefined Meal' }}</h2>
+  <h3>
+    Total Price: {{getPrice()}} RON
+  </h3>
+  <mat-dialog-content>
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="Name">
+      <mat-error *ngIf="form.get('Name')!.invalid && form.get('Name')!.touched">
+        Please enter a valid name
+      </mat-error>
+    </mat-form-field>
+ 
+    <!-- Food selection -->
+    <div>
+      <h3>Selected Foods</h3>
+      <div *ngIf="selectedFoods && selectedFoods.length != 0" class="selected-food-list">
+        <button class="food-button" *ngFor="let food of selectedFoods" (click)="removeFood(food)">{{food.Name}} - {{food.Price}} RON</button>
+      </div>
+      <br>
+      <h3>Select Foods</h3>
+      
+      <div *ngIf="foods.length != 0" class="food-list">
+        <button class="food-button" *ngFor="let food of foods" (click)="addFood(food)">{{food.Name}} - {{food.Price}} RON</button>
+      </div>
+      <mat-paginator [length]="pagination.TotalItems" [pageSize]="pagination.PageSize" [pageIndex]="pagination.PageIndex" [pageSizeOptions]="[5, 10, 25, 50]"
+      (page)="loadFoods($event.pageSize, $event.pageIndex)">
+    </mat-paginator>
+      
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button [disabled]="form.invalid" [mat-dialog-close]="confirmDialog()">OK</button>
+  </mat-dialog-actions>
+</form>

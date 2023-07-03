@@ -1,0 +1,122 @@
+
+.orders-container {
+    max-width: auto;
+    margin: 1rem auto;
+    padding: 2rem;
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: start;
+  }
+
+
+  
+.parent-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  height: 100%;
+}
+
+@media only screen and (max-height: 700px) {
+  .parent-container {
+    justify-content: flex-start;
+  }
+}
+  
+  h2 {
+    font-size: 2rem;
+    font-weight: 300;
+    color: #1976d2;
+  }
+
+
+  .orders-list {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    flex-flow: column;
+    justify-content: flex-start;
+    gap: 1rem;
+    overflow-y: auto;
+    width: 30%;
+  }
+
+
+  .cancel-button {
+    display: inline-block;
+    margin-left: auto;
+    color: red;
+  }
+
+  .done-button {
+    display: inline-block;
+    margin-left: auto;
+    color: green;
+  }
+
+  .orders-processing-list {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-flow: column;
+    gap: 1rem;
+    width: 70%;
+    overflow-y: auto;
+  }
+  
+  .orders-processing-list-item {
+    background-color: #ffffff;
+    padding: 0.5rem;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    user-select: none;
+    width: 90%;
+    height: fit-content;
+  }
+
+  .orders-list-item {
+    background-color: #ffffff;
+    padding: 0.5rem;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    user-select: none;
+    width: 90%;
+  }
+  
+  mat-list-item:hover {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+  }
+
+  .header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: min-content;
+  }
+
+  mat-paginator {
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    margin-top: 1rem;
+  }
+
+  .container {
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+    flex-wrap: nowrap;
+  }
