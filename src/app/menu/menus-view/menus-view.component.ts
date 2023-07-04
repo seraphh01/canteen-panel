@@ -5,6 +5,8 @@ import { Menu } from '../../entities/menu';
 import { MenuService } from '../../services/menu.service';
 import { MenuDialogComponent } from '../menu-dialog/menu-dialog.component';
 import { AlertService } from 'src/app/services/alert.service';
+import { SocketService } from 'src/app/services/socket.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -29,12 +31,16 @@ export class MenusViewComponent implements OnInit {
 
   currentWeekDay! : number;
 
-  constructor(private menuService: MenuService, public dialog: MatDialog, private alertService: AlertService) { }
+  constructor(private snackBar: MatSnackBar, private menuService: MenuService, public dialog: MatDialog, private alertService: AlertService, private socketService: SocketService) { }
 
   ngOnInit() {
     this.menuService.getMenus().subscribe(menus => this.menus = menus);
     this.currentWeekDay = new Date(Date.now()).getDay();
     console.log(`current week day ${this.currentWeekDay}`);
+
+    this.socketService.listen("order_alert").subscribe((res: any) => {
+        this.alertService.openAlertDialog("Orders Alert", res['message']);
+    });
   }
 
   refreshMenus(){

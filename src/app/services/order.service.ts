@@ -39,6 +39,16 @@ export class OrderService {
       );
   }
 
+  getAllOrders(): Observable<Order[]> {
+    return this.http.get<ApiResponse>(`${this.baseUrl}`)
+      .pipe(
+        catchError(this.handleError)
+      )
+      .pipe(
+        map((response: ApiResponse) => response.result as Order[])
+      );
+  }
+
   deleteOrder(id: number): Observable<any> {
     return this.http.delete<ApiResponse>(`${this.baseUrl}/${id}`)
       .pipe(

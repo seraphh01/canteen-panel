@@ -3,6 +3,7 @@ import { Order, OrderStatus } from '../../entities/order';
 import { OrderService } from '../../services/order.service';
 import { AlertService } from 'src/app/services/alert.service';
 import { SocketService } from 'src/app/services/socket.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-orders-view',
@@ -16,12 +17,18 @@ export class OrdersViewComponent implements OnInit {
     return OrderStatus[status].toString();
   }
 
-  constructor(private orderService: OrderService, private alertService: AlertService, private socketService: SocketService) { }
+  constructor(private snackBar:MatSnackBar, private orderService: OrderService, private alertService: AlertService, private socketService: SocketService) { }
 
   ngOnInit() {
     this.refreshOrders();
 
     this.socketService.listen("new_order").subscribe(res => {
+
+      this.snackBar.open(`New order was placed! Order Number #${res.OrderNumber}`, 'Close', {
+        duration: 4000,
+        horizontalPosition: 'right',
+        verticalPosition: 'top',
+      });
 
       var new_order = res as Order;
       this.orders.push(new_order);
@@ -29,8 +36,16 @@ export class OrdersViewComponent implements OnInit {
     });
 
     this.socketService.listen("order_deleted").subscribe((res: number) => {
+
+
       var order = this.orders.find(o => o.Id == res);
       if(order){
+        this.snackBar.open(`Order #${order.OrderNumber} was deleted!`, 'Close', {
+          duration: 4000,
+          horizontalPosition: 'right',
+          verticalPosition: 'top',
+        });
+
         this.orders = this.orders.filter(o => o.Id != res);
       }
     });
@@ -38,7 +53,17 @@ export class OrdersViewComponent implements OnInit {
     this.socketService.listen("order_status_updated").subscribe((res: Order) => {
       var order = this.orders.find(o => o.Id == res.Id);
       if(order){
+
         order.OrderStatus = res.OrderStatus;
+
+        if(order.OrderStatus == OrderStatus.Waiting)
+          {
+            this.snackBar.open(`Please confirm order #${order.OrderNumber} was picked!`, 'Close', {
+              duration: 4000,
+              horizontalPosition: 'right',
+              verticalPosition: 'top',
+            });
+          }  
 
         this.sortOrders();
       }

@@ -9,6 +9,8 @@ import { MenuDetailsComponent } from './menu/menu-details/menu-details.component
 import { MenusViewComponent } from './menu/menus-view/menus-view.component';
 import { AccountPanelComponent } from './account-panel/account-panel.component';
 import { OrdersViewComponent } from './order/orders-view/orders-view.component';
+import { StatisticsComponent } from './statistics/statistics.component';
+import { AboutComponent } from './about/about.component';
 
 const routes: Routes = [
   {
@@ -40,10 +42,10 @@ component: AppComponent},
   },
   {
     path: 'statistics',
-    component: ExampleComponent,
+    component: StatisticsComponent,
   },  {
     path: 'about',
-    component: ExampleComponent,
+    component: AboutComponent,
   },  {
     path: 'contact',
     component: ExampleComponent,

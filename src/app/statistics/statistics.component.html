@@ -1,0 +1,68 @@
+<div class="container">
+
+      
+
+    <mat-card class="stats-card">
+      <mat-card-title>Today</mat-card-title>
+      <mat-card-content>
+        <p>Total Orders: {{ currentDayOrders.length }}</p>
+        <p>Average Delivery Time: {{ formatTime(averageDeliveryTimes['today']) }}</p>
+        <!-- More statistics here -->
+      </mat-card-content>
+    </mat-card>
+  
+    <mat-card class="stats-card">
+      <mat-card-title>Current Week</mat-card-title>
+      <mat-card-content>
+        <p>Total Orders: {{ currentWeekOrders.length }}</p>
+        <p>Average Delivery Time: {{ formatTime(averageDeliveryTimes['currentWeek']) }}</p>
+        <!-- More statistics here -->
+      </mat-card-content>
+    </mat-card>
+  
+    <mat-card class="stats-card">
+      <mat-card-title>Last Week</mat-card-title>
+      <mat-card-content>
+        <p>Total Orders: {{ lastWeekOrders.length }}</p>
+        <p>Average Delivery Time: {{ formatTime(averageDeliveryTimes['lastWeek']) }}</p>
+        <!-- More statistics here -->
+      </mat-card-content>
+    </mat-card>
+  
+    <mat-card class="stats-card">
+      <mat-card-title>All Time</mat-card-title>
+      <mat-card-content>
+        <p>Total Orders: {{ allTimeOrders.length }}</p>
+        <p>Average Delivery Time: {{ formatTime(averageDeliveryTimes['allTime']) }}</p>
+        <!-- More statistics here -->
+      </mat-card-content>
+    </mat-card>
+    <mat-card>
+      <mat-card-content>
+    <div class="chart">
+        <h2>Average number of orders placed per hour</h2>
+        <canvas baseChart
+          [datasets]="barChartData"
+          [labels]="barChartLabels"
+          [options]="barChartOptions"
+          [legend]="barChartLegend">
+        </canvas>
+      </div>
+    </mat-card-content>
+  </mat-card>
+      <mat-card>
+        <mat-card-content>
+          <div style="display: block;">
+            <h2>Total orders per day over the last 30 days</h2>
+            <canvas baseChart
+                    [datasets]="lineChartData"
+                    [labels]="lineChartLabels"
+                    [options]="lineChartOptions"
+                    [legend]="lineChartLegend">
+            </canvas>
+          </div>
+        </mat-card-content>
+      </mat-card>
+      
+  </div>
+  

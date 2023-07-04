@@ -39,7 +39,11 @@ import { EditMealMenuDialogComponent } from './menu/edit-meal-menu-dialog/edit-m
 import { AccountPanelComponent } from './account-panel/account-panel.component';
 import { OrdersViewComponent } from './order/orders-view/orders-view.component';
 import { environment } from 'src/environments/environment';
-import { LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { DatePipe, LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { StatisticsComponent } from './statistics/statistics.component';
+import { NgChartsModule } from 'ng2-charts';
+import { AboutComponent } from './about/about.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -61,7 +65,9 @@ import { LocationStrategy, PathLocationStrategy } from '@angular/common';
     AddMealMenuDialogComponent,
     EditMealMenuDialogComponent,
     AccountPanelComponent,
-    OrdersViewComponent
+    OrdersViewComponent,
+    StatisticsComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,
@@ -80,9 +86,11 @@ import { LocationStrategy, PathLocationStrategy } from '@angular/common';
     FormsModule,
     MatInputModule,
     ReactiveFormsModule,
-    MatSelectModule
-  ],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true }, { provide: LocationStrategy, useClass: PathLocationStrategy }],
+    MatSelectModule,
+    NgChartsModule,
+    MatSnackBarModule
+      ],
+  providers: [DatePipe, { provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true }, { provide: LocationStrategy, useClass: PathLocationStrategy }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

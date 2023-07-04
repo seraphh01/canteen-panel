@@ -5,6 +5,8 @@ import { Meal } from "./meal";
 export interface Order {
     Id: number;
     OrderDateTime: string;
+    DoneDateTime: string;
+    DeliverDateTime: string;
     OrderStatus: OrderStatus;
     OrderNumber: number;
     Foods: Food[];
