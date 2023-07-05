@@ -31,6 +31,7 @@ export class OrdersViewComponent implements OnInit {
       });
 
       var new_order = res as Order;
+      console.log(new_order);
       this.orders.push(new_order);
       this.sortOrders();
     });
@@ -59,7 +60,7 @@ export class OrdersViewComponent implements OnInit {
         if(order.OrderStatus == OrderStatus.Waiting)
           {
             this.snackBar.open(`Please confirm order #${order.OrderNumber} was picked!`, 'Close', {
-              duration: 4000,
+              duration: 0,
               horizontalPosition: 'right',
               verticalPosition: 'top',
             });

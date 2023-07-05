@@ -9,10 +9,12 @@ import { ConfirmDialogComponent } from '../experience/confirm-dialog/confirm-dia
   styleUrls: ['./account-panel.component.css']
 })
 export class AccountPanelComponent implements OnInit {
-
-  constructor(private dialog: MatDialog) { }
+  email: string = "";
+  constructor(private dialog: MatDialog, private authService: AuthService) { }
 
   ngOnInit(): void {
+    this.authService.getEmail().subscribe(res => {
+      this.email = res;    })
   }
 
   showConfirmLogout(){

@@ -2,7 +2,7 @@
   <div class="menu-details-container">
     <div class="header">
       <span>
-        <h2 mat-title color="primary" class="menu-name">{{menu.Name}}: {{menu.OpenTime}} - {{menu.CloseTime}}</h2>
+        <h2 mat-title color="primary" class="menu-name">{{daysOfWeek[menu.DayOfWeek].display}}: {{menu.OpenTime}} - {{menu.CloseTime}}</h2>
         <button mat-button (click)="openEditMenuDialog()" title="Show all Foods for this Menu">
           <mat-icon>list</mat-icon>
         </button>
@@ -25,7 +25,7 @@
     <div class="details-container">
         <mat-card class="card-container">
           <div class="card-container-header">
-            <h3 class="card-container-header-title">Mese predefinite</h3>
+            <h3 class="card-container-header-title">Predefined Meals</h3>
             <button mat-button (click)="switchDeleteMeals()">
               <mat-icon>delete</mat-icon>
             </button>
@@ -49,7 +49,7 @@
           </mat-card>
           <mat-card class="card-container">
             <div class="card-container-header">
-              <h3 class="card-container-header-title">Mâncare disponibilă</h3>
+              <h3 class="card-container-header-title">Available Food</h3>
               <button mat-button (click)="switchDeleteFoods()">
                 <mat-icon>delete</mat-icon>
               </button>

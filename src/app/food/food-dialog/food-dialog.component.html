@@ -1,5 +1,5 @@
 <form [formGroup]="form">
-    <h2 mat-dialog-title>{{ data ? 'Editează mâncare' : 'Adaugă mâncarea' }}</h2>
+    <h2 mat-dialog-title>{{ data.food ? 'Editează mâncare' : 'Adaugă mâncarea' }}</h2>
     <mat-dialog-content>
       <mat-form-field>
         <mat-label>Nume</mat-label>
@@ -14,6 +14,14 @@
         <mat-error *ngIf="form.get('Price')!.invalid && form.get('Price')!.touched">
             Vă rugăm să introduceți un preț valid
           </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Food Type</mat-label>
+        <mat-select formControlName="FoodTypeId">
+          <mat-option *ngFor="let foodType of data.foodTypes" [value]="+foodType.Id">
+            {{ getFoodName(foodType.Id) }}
+          </mat-option>
+        </mat-select>
       </mat-form-field>
     </mat-dialog-content>
     <mat-dialog-actions>

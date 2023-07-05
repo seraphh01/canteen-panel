@@ -12,7 +12,7 @@ import { FoodService } from 'src/app/services/food.service';
 })
 export class AddFoodMenuDialogComponent implements OnInit {
   selectedFood! : Food | null;
-  selectedFoodQuantity = 1;
+  selectedFoodQuantity = 10;
   foodSearchName = "";
   pagination: Pagination = {PageIndex:0, TotalItems: 0} as Pagination;
   foods!: Food[];
@@ -61,7 +61,6 @@ export class AddFoodMenuDialogComponent implements OnInit {
 
     // dialogRef.afterClosed().subscribe(result => {
     //   if(result) {
-    //     console.log(result);
         
     //     this.dialogRef.close(result);
     //   }

@@ -7,6 +7,7 @@ import { Food } from '../entities/food';
 import { AlertDialogComponent } from '../experience/alert-dialog/alert-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Pagination } from '../entities/pagination';
+import { FoodType } from '../entities/food-type';
 
 
 interface ApiResponse {
@@ -45,6 +46,8 @@ export class FoodService {
       );
   }
 
+
+
   deleteFood(id: number): Observable<any> {
     return this.http.delete<ApiResponse>(`${this.baseUrl}/${id}`)
       .pipe(
@@ -55,7 +58,8 @@ export class FoodService {
   addFood(food: Food): Observable<Food> {
     const requestBody = {
       name: food.Name,
-      price: food.Price
+      price: food.Price,
+      food_type_id: food.FoodTypeId
     };
 
     return this.http.post<ApiResponse>(this.baseUrl, requestBody)
@@ -70,7 +74,8 @@ export class FoodService {
   updateFood(food: Food): Observable<any> {
     const requestBody = {
       name: food.Name,
-      price: food.Price
+      price: food.Price,
+      food_type_id: food.FoodTypeId
     };
     return this.http.put<ApiResponse>(`${this.baseUrl}/${food.Id}`, requestBody)
       .pipe(

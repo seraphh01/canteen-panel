@@ -36,7 +36,6 @@ export class MenusViewComponent implements OnInit {
   ngOnInit() {
     this.menuService.getMenus().subscribe(menus => this.menus = menus);
     this.currentWeekDay = new Date(Date.now()).getDay();
-    console.log(`current week day ${this.currentWeekDay}`);
 
     this.socketService.listen("order_alert").subscribe((res: any) => {
         this.alertService.openAlertDialog("Orders Alert", res['message']);

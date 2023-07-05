@@ -8,6 +8,8 @@ import { FoodService } from 'src/app/services/food.service';
 import { FoodDialogComponent } from '../food-dialog/food-dialog.component';
 import {AlertService }from '../../services/alert.service';
 import { Pagination } from 'src/app/entities/pagination';
+import { FoodType } from 'src/app/entities/food-type';
+import { FoodTypeService } from 'src/app/services/food-type.service';
 
 @Component({
   selector: 'app-foods-view',
@@ -17,19 +19,27 @@ import { Pagination } from 'src/app/entities/pagination';
 export class FoodsViewComponent implements OnInit {
   delete = false;
   foods: Food[] = [];
+  foodTypes: FoodType[] = [];
   length = 110;
   foodSearchName = "";
   pagination: Pagination = {PageSize: 10, PageIndex: 0} as Pagination;
 
-  constructor(private foodService: FoodService,
+  constructor(private foodService: FoodService, private foodTypeService: FoodTypeService,
     public dialog: MatDialog, private alertService: AlertService) { }
 
   ngOnInit() {
     this.refreshFoods();
+    this.getFoodTypes();
+  }
+
+  getFoodTypes(){
+    this.foodTypeService.getFoodTypes().subscribe((res: FoodType[]) => {
+      this.foodTypes = res;
+    });
   }
 
   fetchData(data: any){
-    this.foods = data.result; 
+    this.foods = data.result;
     this.pagination = data.pagination;
     this.pagination.PageIndex -= 1;
   }
@@ -55,7 +65,10 @@ export class FoodsViewComponent implements OnInit {
   openAddNewFoodDialog(): void {
     const dialogRef = this.dialog.open(FoodDialogComponent, {
       width: '400px',
-      data: null
+      data: {
+        data: null,
+        foodTypes: this.foodTypes
+      }
     });
   
     dialogRef.afterClosed().subscribe(result => {
@@ -72,7 +85,10 @@ export class FoodsViewComponent implements OnInit {
   openEditFoodDialog(food: Food): void {
     const dialogRef = this.dialog.open(FoodDialogComponent, {
       width: '400px',
-      data: food
+      data: {
+        food: food,
+        foodTypes: this.foodTypes
+      }
     });
   
     dialogRef.afterClosed().subscribe(result => {
@@ -81,6 +97,8 @@ export class FoodsViewComponent implements OnInit {
           var f = this.foods.find(f => f.Id == food.Id);
           f!.Name = result.Name;
           f!.Price = result.Price;
+          f!.FoodTypeId = result.FoodTypeId;
+          f!.FoodType = result.FoodType;
         }, (error) => {
           this.alertService.openAlertDialog("An error occured!", error);
         });

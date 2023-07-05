@@ -10,7 +10,7 @@
       
       <mat-list>
         <mat-list-item [ngStyle]="{'background-color': (currentWeekDay + 6 ) % 7 == menu.DayOfWeek?  'green' : 'white' }" *ngFor="let menu of menus" [routerLink]="['/menus', menu.Id]">
-          <span>{{ menu.Name }} - {{ daysOfWeek[menu.DayOfWeek].display }}</span>
+          <span>{{ daysOfWeek[menu.DayOfWeek].display }}: {{menu.OpenTime}} - {{menu.CloseTime}}</span>
         </mat-list-item>
         <mat-list-item (click)="openAddMenuDialog()">
           <mat-icon>add</mat-icon>

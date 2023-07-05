@@ -35,7 +35,15 @@ export class MenuDetailsComponent implements OnInit {
   
   paginationMeals: Pagination = {PageSize: 10, PageIndex:0} as Pagination;
   deleteMeals = false;
-
+  daysOfWeek = [
+    { value: 0, display: 'Monday' },
+    { value: 1, display: 'Tuesday' },
+    { value: 2, display: 'Wednesday' },
+    { value: 3, display: 'Thursday' },
+    { value: 4, display: 'Friday' },
+    { value: 5, display: 'Saturday' },
+    { value: 6, display: 'Sunday' },
+  ];
   constructor(private socketService: SocketService, private alertService: AlertService, private router: Router, private route: ActivatedRoute, public dialog: MatDialog, private location: Location, private menuService: MenuService) { }
 
   ngOnInit(): void {
@@ -46,11 +54,9 @@ export class MenuDetailsComponent implements OnInit {
     //call getMenu to menu Service
     this.menuService.getMenu(this.menuId).subscribe((menu) => {
       this.menu = menu;
-      console.log(menu);
     });
 
     this.socketService.listen("new_order").subscribe((res: Order) => {
-      console.log(res);
       for(let food of res.Foods){
         var menu_food = this.menu.Foods.find(f => f.Id == food.Id);
         if(menu_food){
@@ -134,8 +140,9 @@ export class MenuDetailsComponent implements OnInit {
           var foodInMenu = this.menu.Foods.find(f => f.Id == result.Id);
           
           if(foodInMenu){
-            foodInMenu.Quantity += result.Quantity;
+            foodInMenu.Quantity += result.Quantity as number;
           }else{
+            res.OrderedQuantity = 0;
             this.menu.Foods.unshift(res);
           }
         }, error => {
@@ -178,7 +185,6 @@ export class MenuDetailsComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if(result) {
-        console.log(result);
         this.menuService.updateFoodMenu(this.menuId, result.Id, result.Quantity).subscribe(res => {
           food.Quantity = res.Quantity;
         }, error => {
@@ -269,7 +275,6 @@ export class MenuDetailsComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.menuService.deleteMenu(this.menuId).subscribe(res => {
-          console.log(res);
           this.router.navigate(['/menus']);
         });
 

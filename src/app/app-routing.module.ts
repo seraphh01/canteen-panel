@@ -11,6 +11,7 @@ import { AccountPanelComponent } from './account-panel/account-panel.component';
 import { OrdersViewComponent } from './order/orders-view/orders-view.component';
 import { StatisticsComponent } from './statistics/statistics.component';
 import { AboutComponent } from './about/about.component';
+import { ContactComponent } from './contact/contact.component';
 
 const routes: Routes = [
   {
@@ -48,7 +49,7 @@ component: AppComponent},
     component: AboutComponent,
   },  {
     path: 'contact',
-    component: ExampleComponent,
+    component: ContactComponent,
   },  {
     path: 'menus/:menuId',
     component: MenuDetailsComponent,

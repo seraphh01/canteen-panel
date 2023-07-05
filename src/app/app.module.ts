@@ -44,6 +44,7 @@ import { StatisticsComponent } from './statistics/statistics.component';
 import { NgChartsModule } from 'ng2-charts';
 import { AboutComponent } from './about/about.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { ContactComponent } from './contact/contact.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     AccountPanelComponent,
     OrdersViewComponent,
     StatisticsComponent,
-    AboutComponent
+    AboutComponent,
+    ContactComponent
   ],
   imports: [
     BrowserModule,

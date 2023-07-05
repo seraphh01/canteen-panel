@@ -33,7 +33,6 @@ export class MealsViewComponent implements OnInit {
   }
 
   fetchData(data: any){
-    console.log(data);
     this.meals = data.result as Meal[];
     this.pagination = data.pagination;
     this.pagination.PageIndex -= 1;
@@ -47,7 +46,6 @@ export class MealsViewComponent implements OnInit {
   
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        console.log(result);
         this.mealService.addMeal(result).subscribe((meal) => {
           this.meals.unshift(meal);
           this.pagination.TotalItems += 1;

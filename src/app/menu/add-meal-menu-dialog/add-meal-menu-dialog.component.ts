@@ -13,7 +13,7 @@ import { MealService } from 'src/app/services/meal.service';
 export class AddMealMenuDialogComponent implements OnInit {
 
   selectedMeal! : Meal | null;
-  selectedMealQuantity = 1;
+  selectedMealQuantity = 10;
   mealSearchName = "";
   pagination: Pagination = {PageIndex:0, TotalItems: 0, PageSize:10} as Pagination;
   meals!: Meal[];
@@ -27,8 +27,6 @@ export class AddMealMenuDialogComponent implements OnInit {
     this.meals = data.result; 
     this.pagination = data.pagination;
     this.pagination.PageIndex -= 1;
-
-    console.log(this.pagination);
   }
 
   refreshMeals(){

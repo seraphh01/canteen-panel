@@ -42,9 +42,14 @@ export class AuthService {
         }));
   }
 
+  getEmail(){
+    return this.http.post<any>(`${environment.baseUrl}/users/me`, {}).pipe(map(res => {
+      return res['result'];
+    }));
+  }
+
   loginMicrosoft(){
     return this.http.get<any>(`${environment.baseUrl}/microsoft/login`, {}).pipe(map(res => {
-      console.log(res);
       localStorage.setItem('access-token', res["access-token"]);
       this.router.navigate(["menus"]);
     }));

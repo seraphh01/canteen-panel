@@ -155,8 +155,6 @@ lineChartPlugins = [];
       hourlyOrderCounts[orderDate.getDay()] = true;  // mark this day as having orders
     });
 
-    console.log(hourlyOrders);
-
     const numberOfDays = hourlyOrderCounts.filter(Boolean).length;  // count number of days with orders
   
     for (let i = 0; i < 24; i++) {

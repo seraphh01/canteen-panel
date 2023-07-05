@@ -55,7 +55,6 @@ export class LoginComponent implements OnInit {
                 error: error => {
                     this.authChanged.emit({auth: false});
                     this.loading = false;
-                    console.log(error);
                     this.error = error['error'];
                 }
             });
@@ -83,7 +82,6 @@ export class LoginComponent implements OnInit {
         //         },
         //         error: error => {
         //             this.loading = false;
-        //             console.log(error);
         //             this.error = error['error'];
         //         }
         //     });
